@@ -1,0 +1,52 @@
+{
+	"ivr": {
+		"text": "Thanks for calling. You can press a key or say the department name. Press 1 for Sales, press 2 for Support",
+		"options": [
+			{
+				"friendlyName": "Sales",
+				"digit": 1,
+				"id": "sales"
+			},
+			{
+				"friendlyName": "Support",
+				"digit": 2,
+				"id": "support"
+			}
+		]
+	},
+	"queues": [
+		{
+			"friendlyName": "Chat Queue",
+			"filterFriendlyName": "Chat",
+			"id": "chat",
+			"taskQueueSid": null,
+			"expression": "channel == \"chat\"",
+			"targetWorkerExpression": ""
+		},
+		{
+			"friendlyName": "Phone Queue",
+			"filterFriendlyName": "Phone",
+			"id": "phone",
+			"taskQueueSid": null,
+			"expression": "channel == \"phone\"",
+			"targetWorkerExpression": "task.team == worker.team OR task.transferToWorkerSid = worker.sid"
+		},
+		{
+			"friendlyName": "Video Queue",
+			"filterFriendlyName": "Video",
+			"id": "video",
+			"taskQueueSid": null,
+			"expression": "channel == \"video\"",
+			"targetWorkerExpression": ""
+		}
+	],
+	"twilio": {
+		"workerOfflineActivitySid": null,
+		"workerAvailableActivitySid": null,
+		"workerUnavailableActivitySid": null,
+		"callerId": null,
+		"applicationSid": null,
+		"workflowSid": null,
+		"facebookPageId": null
+	}
+}

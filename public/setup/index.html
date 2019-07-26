@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Twilio Contact Center: Setup</title>
+
+  <link rel="stylesheet" href="/styles/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/default.css" type="text/css" />
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+  type="text/css" rel="stylesheet" />
+
+</head>
+
+<body ng-app="setupApplication" ng-controller="SetupController"  data-ng-init="init()" >
+
+   <div ng-show="UI.warning" class="panel panel-default ui-warning" ng-cloak>{{UI.warning | json}}</div>
+
+  <section style="margin: auto; width:750px;">
+
+    <h2 class="page-header">Twilio Contact Center: Setup<a href="/" class="header-home-link">Back Home</a></h2>
+
+    <h4>Workspace: {{workspace.sid}} - {{workspace.friendlyName}}</h4>
+
+    <form name="setupForm">
+
+      <h6>Worker Offline Activity:</h6>
+
+      <div class="btn-group" uib-dropdown>
+
+        <select ng-model="configuration.twilio.workerOfflineActivitySid" class="form-control" required>
+          <option ng-repeat="activity in activities" value="{{ activity.sid }}">{{ activity.friendlyName }}</option>
+        </select>
+
+      </div>
+
+      <h6>Worker Available Activity:</h6>
+
+      <div class="btn-group" uib-dropdown>
+
+        <select ng-model="configuration.twilio.workerAvailableActivitySid" class="form-control" required>
+          <option ng-repeat="activity in activities" value="{{ activity.sid }}">{{ activity.friendlyName }}</option>
+        </select>
+
+      </div>
+
+     
+      <h6>Worker Unavailable Activity:</h6>
+
+      <div class="btn-group" uib-dropdown>
+
+        <select ng-model="configuration.twilio.workerUnavailableActivitySid" class="form-control" required>
+          <option ng-repeat="activity in activities" value="{{ activity.sid }}">{{ activity.friendlyName }}</option>
+        </select>
+
+      </div>
+
+      <br /><br />
+
+      <h4>Phone Number:</h4>
+
+      <span class="help-block">This phone number will be configured as your voice inbound and outbound number by this setup script. If you provide a message-capable phone number the demo provides a bridge from SMS to Twiio IP Chat and vice versa.</span>
+
+      <input style="width:350px" ng-model="configuration.twilio.callerId" data-ng-trim="false" name="callerId" type="text" class="form-control" placeholder="+..." required phone-number>
+
+      <br />
+
+      <h4>Facebook Page ID (optional):</h4>
+
+      <span class="help-block">Please enable Facebook Messaging in your Twilio account and forward messages to <span style="white-space: nowrap; font-weight:bold">http://&lt;your_application&gt;/api/messaging-adapter/inbound</span> (request method POST)</span>
+
+       <input style="width:350px" ng-model="configuration.twilio.facebookPageId" data-ng-trim="true" name="facebookPageId" type="text" class="form-control">
+
+      <div ng-messages="setupForm.callerId.$error" role="alert" style="margin-top: 10px; margin-bottom: 0px;">
+          <div ng-message="required" class="error-message alert alert-danger">Phone number is required</div>
+          <div ng-message="invalidPhone"  class="error-message alert alert-danger">Invalid phone number</div>
+      </div>
+
+      <div>
+
+        <button class="btn btn-primary" ng-disabled="setupForm.$invalid || setupForm.$pristine || UI.isSaving" ng-click="saveConfig()"><span style="margin-right: 10px;" ng-show="UI.isSaving == true"><i class="fa fa-refresh fa-spin"></i></span>Save Settings</button>
+
+      </div>
+
+      <div style="margin-top:10px" ng-if="phoneNumber.isValid == false" class="alert alert-dismissible alert-danger">
+          <strong>Oh snap!</strong><br />
+
+          <span ng-if="phoneNumber.code == 'TWILIO_UNKNOWN_ERROR'">{{ message | json}}</span>
+
+          <span ng-if="phoneNumber.code == 'TWILIO_PHONE_NUMBER_NOT_FOUND'">The phone number could not be found in your Twilio account.</span>
+
+          <span ng-if="phoneNumber.code == 'TWILIO_MULTIPLE_PHONE_NUMBERS'">More than one Twilio phone number found, something went wrong.</span>
+
+          <span ng-if="phoneNumber.code == 'TWILIO_PHONE_NUMBER_NOT_VOICE_CAPABLE'">The Twilio phone number does not support voice.</span>
+
+      </div>
+
+       <div style="margin-top:10px" ng-if="error != null" class="alert alert-dismissible alert-danger">
+          <strong>Oh snap!</strong><br />
+
+          <span>{{ error | json}}</span>
+
+      </div>
+
+      <br>
+
+    </div>
+
+  </form>
+
+</section>
+
+<script src="/scripts/angular.min.js"></script>
+<script src="/scripts/angular-messages.min.js"></script>
+<script src="/scripts/directives/PhoneNumberDirective.js"></script>
+
+<script src="SetupController.js"></script>
+
+</body>
+</html>

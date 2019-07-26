@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Twilio Contact Center: Contact Form</title>
+
+	<link rel="stylesheet" href="/styles/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" href="/styles/default.css" type="text/css" />
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	type="text/css" rel="stylesheet" />
+
+</head>
+
+<body ng-app="supportApplication">
+
+	<div class="container" style="max-width:960px">
+
+		<div class="row">
+
+			<div class="page-header hidden-sm hidden-xs">
+				<h2>Twilio Contact Center: Contact Form<a href="/" class="header-home-link">Back Home</a></h2>
+			</div>
+
+			<div class="col-xs-12">
+				<h3 class="hidden-md hidden-lg">Contact Form<a href="/" class="header-home-link">Back Home</a></h3>
+			</div>
+
+		</div>
+
+		<section class="row" ng-controller="ContactController" data-ng-init="init()" ng-cloak>
+
+			<div class="col-md-8">
+
+				<form class="form-horizontal well" name="supportForm">
+					<fieldset>
+						<legend>...let us call you back</legend>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Department</label>
+							<div class="col-md-8">
+								<select ng-model="question.team" class="form-control" id="team" required>
+									<option ng-repeat="option in configuration.ivr.options" value="{{ option.id }}">{{ option.friendlyName }}</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">What question do you have?</label>
+							<div class="col-md-8">
+								<textarea type="text" class="form-control" ng-model-options="{ debounce: 1000 }" name="text" ng-model="question.text" class="form-control" rows="4"></textarea>
+								<span class="help-block">Please type in the question you have</span>
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label">Your name and phone number?</label>
+							<div class="col-md-4">
+								<input type="text" placeholder="Name" name="name" ng-model="question.name" class="form-control" required>
+							</div>
+							<div class="col-md-4">
+								<input ng-model-options="{ debounce: 1000 }" type="text" placeholder="+..." name="phone" ng-model="question.phone" class="form-control" required phone-number>
+							</div>
+						</div>
+
+						<div class="col-md-8 col-md-offset-4">
+							<div ng-messages="supportForm.phone.$error" role="alert">
+								<div ng-message="required"ng-show="supportForm.phone.$touched" class="error-message alert alert-danger">Phone number is required</div>
+								<div ng-message="invalidPhone" class="error-message alert alert-danger">Invalid phone number</div>
+							</div>
+
+							<div ng-messages="supportForm.$error" role="alert">
+								<div ng-message="serverError" class="alert alert-danger">
+		            	<strong>Oh snap!</strong><br>An error occured, please check JavaScript console for details
+		          	</div>
+							</div>
+
+							<button ng-click="submit()" ng-disabled="supportForm.$pristine || supportForm.$valid !== true" class="submit btn btn-primary btn-md">Submit</button>
+
+							<div ng-show="submitted == true" class="alert alert-success" role="alert">Thanks, we call you as soon as possible.</div>
+						</div>
+
+					</fieldset>
+				</form>
+
+			</div>
+
+			<div class="col-md-4 hidden-sm hidden-xs">
+				<h4 style="margin:0px">Call us:</h4>
+				<h3 class="caller-id" style="margin:0px">{{configuration.twilio.callerId}}</h3>
+
+				<h4>Chat with an agent?</h4>
+				<a href="chat.html">click here</a>
+
+			</div>
+
+		</section>
+
+	</div>
+
+	<script src="/scripts/angular.min.js"></script>
+	<script src="/scripts/angular-messages.min.js"></script>
+	<script src="/scripts/directives/PhoneNumberDirective.js"></script>
+
+	<script src="ContactController.js"></script>
+
+</body>
+</html>
