@@ -34,8 +34,8 @@
               <th>Name</th>
               <th>Status</th>
               <th>Channel(s)</th>
-              <th>On Going Call</th>
               <th>Team</th>
+              <th>On Going Call</th>
               <th>&nbsp;</th>
             </tr>
           </thead>
@@ -45,7 +45,7 @@
             <td>{{worker.activityName}}</td>
             <td>{{worker.attributes.channels | ChannelListFilter:channels}}</td>
             <td>{{worker.attributes.team | TeamName:configuration}}</td>
-
+            <td style="text-align:right"><button class="btn btn-warning btn-xs" ng-click="" ng-show="">Barge</button></td>
             <td style="text-align:right"><button class="btn btn-danger btn-xs" ng-click="deleteAgent(worker)" ng-show="worker.activityName == 'Offline'">remove</button></td>
           </tr>
         </tbody>
