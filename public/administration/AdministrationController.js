@@ -1,3 +1,5 @@
+import { getOnGoingConferences } from "../../controllers/phone";
+
 function AdministrationController ($scope, $http, $log, $q) {
 	/* misc configuration data, for instance callerId for outbound calls */
 	$scope.configuration;
@@ -95,7 +97,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 
 	$scope.init = function () {
 
-		$q.all([retrieveSetup(), retrieveWorkers()])
+		$q.all([retrieveSetup(), retrieveWorkers(),retrieveOnGoingConferences()])
 			.then(function (data) {
 				$log.log('configuration and worker loaded');
 			}).catch(function (error) {
