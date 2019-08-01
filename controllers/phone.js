@@ -36,17 +36,19 @@ module.exports.getConference = function (req, res) {
 }
 
 module.exports.call = function (req, res) {
-	let name = 'conf_' + req.body.CallSid
+	//let name = 'conf_' + req.body.CallSid
+	let name = 'room1234'
 
 	const twiml = new twilio.twiml.VoiceResponse()
-	const dial = twiml.dial({ callerId: req.configuration.twilio.callerId })
+	//const dial = twiml.dial({ callerId: req.configuration.twilio.callerId })
+	 
 
-	dial.conference(
-		{
+	const dial = twiml.dial().conference(
+		/*{
 			endConferenceOnExit: true,
 			statusCallbackEvent: 'join',
 			statusCallback: `/api/phone/call/${req.body.CallSid}/add-participant/${encodeURIComponent(req.body.phone)}`
-		},
+		},*/
 		name
 	)
 
