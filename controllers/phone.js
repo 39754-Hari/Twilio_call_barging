@@ -110,10 +110,13 @@ module.exports.getOnGoingConferences = function(req,res){
 								console.log(error)
 							})
 						})
+					})
+					.then(response=>{
+					console.log('conferences List After ::', JSON.stringify(conferences));
+					//console.log('conferences List After ::')
+					res.json(response);
 					});
-					//console.log('conferences List After ::', JSON.stringify(conferences));
-					console.log('conferences List After ::')
-					res.json(conferences);
+					
 				}
 			})
 			.catch(error => {
