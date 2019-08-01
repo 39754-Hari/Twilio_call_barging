@@ -89,23 +89,20 @@ module.exports.getOnGoingConferences = function(req,res){
 	console.log('INside getOnGoingConferences');
 	const options = {
 		status: 'in-progress'
-	}
-
-	return new Promise((resolve, reject) => {
+	}	
 		client.conferences
 			.list(options)
 			.then(conferences => {
 				if (conferences.length === 0) {
-					reject('NOT_FOUND')
+					res.json('NOT_FOUND')
 				} else {
 					console.log('conferences List ::', JSON.stringify(conferences));
-					resolve(conferences)
+					res.json(conferences);
 				}
 			})
 			.catch(error => {
-				reject(error)
+				res.status(500).end();
 			})
-	})
 }
 
 module.exports.hold = function (req, res) {
