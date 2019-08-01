@@ -113,7 +113,7 @@ module.exports.getOnGoingConferences = function(req,res){
 							})
 						})
 					});
-					
+					console.log('conferences List After ::', JSON.stringify(conferences));
 					res.json(conferences);
 				}
 			})
