@@ -101,6 +101,11 @@ module.exports.getOnGoingConferences = function(req,res){
 						conferenceHelper.getConferenceParticipants(conference.sid)
 						.then(participants=>{
 							console.log('Participants List:',participants);
+							participants.forEach(participant =>{
+								client.calls(participant)
+      									.fetch()
+      									.then(call => console.log('Participant::',participant,';Call to:',call.to))
+							})
 						})
 					});
 					
