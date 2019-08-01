@@ -38,7 +38,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 		$http.get('/api/phone/getOnGoingConf').then(function (response) {
 			$scope.conferences = [];
 
-			response.data.conferences.forEach(function (conference) {
+			response.forEach(function (conference) {
 				$scope.conferences.push(conference);
 			});
 
