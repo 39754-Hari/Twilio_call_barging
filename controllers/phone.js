@@ -126,7 +126,7 @@ getCallerName = function(ParticipantsList){
 					  .then(call => {
 						  console.log('Participant::',participant,';Call to:',call.to)
 						  let callTo = call.to;
-						  if(callTo.indexOf('client')){
+						  if(callTo.indexOf('client')!=-1){
 							  console.log('condition pass');
 							callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
 							resolve(callTo)
