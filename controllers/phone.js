@@ -104,7 +104,8 @@ module.exports.getOnGoingConferences = function(req,res){
 							getCallerName(participants)
 							.then(caller =>{
 								console.log('Caller name',caller,conference.sid);
-								conference.agent = caller;								
+								conference.agent = caller;
+								console.log('Caller name',caller,conference.sid,conference.agent);								
 							}).catch(error => {
 								console.log(error)
 							})
