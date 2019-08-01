@@ -97,6 +97,13 @@ module.exports.getOnGoingConferences = function(req,res){
 					res.json('NOT_FOUND')
 				} else {
 					console.log('conferences List ::', JSON.stringify(conferences));
+					conferences.forEach(conference => {
+						conferenceHelper.getConferenceParticipants(conference.sid)
+						.then(participants=>{
+							console.log('Participants List:',participants);
+						})
+					});
+					
 					res.json(conferences);
 				}
 			})
