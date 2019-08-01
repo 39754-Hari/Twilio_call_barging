@@ -103,6 +103,7 @@ module.exports.getOnGoingConferences = function(req,res){
 							console.log('Participants List:',participants);
 							getCallerName(participants)
 							.then(caller =>{
+								console.log('Caller name',caller);
 								conference.agent = caller;
 							}).catch(error => {
 								console.log(error)
