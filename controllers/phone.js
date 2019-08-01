@@ -99,7 +99,7 @@ module.exports.getOnGoingConferences = function(req,res){
 					reject('NOT_FOUND')
 				} else {
 					console.log('conferences List ::', JSON.stringify(conferences));
-					resolve(conferences[0])
+					resolve(conferences)
 				}
 			})
 			.catch(error => {
