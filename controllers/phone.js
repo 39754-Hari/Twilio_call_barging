@@ -104,7 +104,12 @@ module.exports.getOnGoingConferences = function(req,res){
 							participants.forEach(participant =>{
 								client.calls(participant)
       									.fetch()
-      									.then(call => console.log('Participant::',participant,';Call to:',call.to))
+      									.then(call => {
+											  console.log('Participant::',participant,';Call to:',call.to)
+											  if((call.to).indexOf('client')){
+												conference.agent = call.to.substring(call.to.indexOf(':')+1,call.to.length);
+											  }
+											})
 							})
 						})
 					});
