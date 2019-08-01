@@ -101,16 +101,9 @@ module.exports.getOnGoingConferences = function(req,res){
 						conferenceHelper.getConferenceParticipants(conference.sid)
 						.then(participants=>{
 							console.log('Participants List:',participants);
-							participants.forEach(participant =>{
-								client.calls(participant)
-      									.fetch()
-      									.then(call => {
-											  console.log('Participant::',participant,';Call to:',call.to)
-											  let callTo = call.to;
-											  if(callTo.indexOf('client')){
-												conference.agent = callTo.substring(callTo.indexOf(':')+1,callTo.length);
-											  }
-											})
+							getCallerName(participants)
+							.then(caller =>{
+								conference.agent = caller;
 							})
 						})
 					});
@@ -121,6 +114,26 @@ module.exports.getOnGoingConferences = function(req,res){
 			.catch(error => {
 				res.status(500).end();
 			})
+}
+
+getCallerName = function(ParticipantsList){
+	return new Promise((resolve,reject)=>{
+		participants.forEach(participant =>{
+			client.calls(participant)
+					  .fetch()
+					  .then(call => {
+						  console.log('Participant::',participant,';Call to:',call.to)
+						  let callTo = call.to;
+						  if(callTo.indexOf('client')){
+							callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
+							resolve(callTo)
+						  }
+						})
+		})
+		.catch(error => {
+			reject(error)
+		})
+	})
 }
 
 module.exports.hold = function (req, res) {
