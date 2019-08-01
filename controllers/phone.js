@@ -130,11 +130,11 @@ getCallerName = function(ParticipantsList){
 							callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
 							resolve(callTo)
 						  }
+						}).catch(error => {
+							reject(error)
 						})
 		})
-		.catch(error => {
-			reject(error)
-		})
+		
 	})
 }
 
