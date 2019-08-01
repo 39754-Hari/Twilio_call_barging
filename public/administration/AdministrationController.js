@@ -30,6 +30,25 @@ function AdministrationController ($scope, $http, $log, $q) {
 
 	};
 
+
+	let retrieveOnGoingConferences = function () {
+		let deferred = $q.defer();
+
+		$http.get('/phone/getOnGoingConf').then(function (response) {
+			$scope.conferences = [];
+
+			response.data.conferences.forEach(function (conference) {
+				$scope.conferences.push(conference);
+			});
+
+			deferred.resolve();
+		}, function (response) {
+			deferred.reject(response);
+		});
+		return deferred.promise;
+
+	};
+
 	let retrieveWorkers = function () {
 		let deferred = $q.defer();
 

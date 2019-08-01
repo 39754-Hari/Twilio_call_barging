@@ -85,6 +85,28 @@ module.exports.addParticipant = function (req, res) {
 
 }
 
+module.exports.getOnGoingConferences = function(req,res){
+	const options = {
+		status: 'in-progress'
+	}
+
+	return new Promise((resolve, reject) => {
+		client.conferences
+			.list(options)
+			.then(conferences => {
+				if (conferences.length === 0) {
+					reject('NOT_FOUND')
+				} else {
+					console.log(JSON.stringify(conferences));
+					resolve(conferences[0])
+				}
+			})
+			.catch(error => {
+				reject(error)
+			})
+	})
+}
+
 module.exports.hold = function (req, res) {
 
 	client

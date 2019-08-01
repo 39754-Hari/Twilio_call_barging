@@ -126,6 +126,8 @@ router.route('/phone/call/:sid/add-participant/:phone').post(phone.addParticipan
 router.route('/phone/call/:sid/conference').get(phone.getConference)
 router.route('/phone/hold').post(phone.hold)
 
+router.route('/phone/getOnGoingConf').post(phone.getOnGoingConferences)
+
 var phoneTransfer = require('./controllers/phone-transfer.js')
 
 router.route('/phone/transfer/available-workers').get(phoneTransfer.getAvailableWorkers)

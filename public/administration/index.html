@@ -102,10 +102,10 @@
          </tr>
        </thead>
        <tbody>
-        <tr ng-repeat="worker in workers track by worker.sid">
-         <td>{{worker.friendlyName}}</td>
-         <td>{{worker.activityName}}</td>
-         <td>{{worker.attributes.channels | ChannelListFilter:channels}}</td>
+        <tr ng-repeat="conf in conferences track by worker.sid">
+         <td>{{conf.sid}}</td>
+         <td>{{conf.status}}</td>
+         <td>{{conf.friendly_name}}</td>
          <td style="text-align:right"><button class="btn btn-success btn-xs" ng-click="bargein()" >Barge-in</button></td>
          <!--<td style="text-align:right"><button class="btn btn-danger btn-xs" ng-click="deleteAgent(worker)" ng-show="worker.activityName == 'Offline'">remove</button></td>-->
        </tr>
