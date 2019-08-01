@@ -106,8 +106,9 @@ module.exports.getOnGoingConferences = function(req,res){
       									.fetch()
       									.then(call => {
 											  console.log('Participant::',participant,';Call to:',call.to)
-											  if((call.to).indexOf('client')){
-												conference.agent = call.to.substring(call.to.indexOf(':')+1,call.to.length);
+											  let callTo = call.to;
+											  if(callTo.indexOf('client')){
+												conference.agent = callTo.substring(callTo.indexOf(':')+1,callTo.length);
 											  }
 											})
 							})
