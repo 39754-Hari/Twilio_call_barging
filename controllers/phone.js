@@ -86,6 +86,7 @@ module.exports.addParticipant = function (req, res) {
 }
 
 module.exports.getOnGoingConferences = function(req,res){
+	console.log('INside getOnGoingConferences');
 	const options = {
 		status: 'in-progress'
 	}
@@ -97,7 +98,7 @@ module.exports.getOnGoingConferences = function(req,res){
 				if (conferences.length === 0) {
 					reject('NOT_FOUND')
 				} else {
-					console.log(JSON.stringify(conferences));
+					console.log('conferences List ::', JSON.stringify(conferences));
 					resolve(conferences[0])
 				}
 			})

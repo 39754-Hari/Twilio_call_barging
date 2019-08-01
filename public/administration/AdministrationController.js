@@ -34,7 +34,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 	let retrieveOnGoingConferences = function () {
 		let deferred = $q.defer();
 
-		$http.get('/phone/getOnGoingConf').then(function (response) {
+		$http.get('/api/phone/getOnGoingConf').then(function (response) {
 			$scope.conferences = [];
 
 			response.data.conferences.forEach(function (conference) {
