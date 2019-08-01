@@ -1,4 +1,3 @@
-import { getOnGoingConferences } from "../../controllers/phone";
 
 function AdministrationController ($scope, $http, $log, $q) {
 	/* misc configuration data, for instance callerId for outbound calls */
@@ -72,7 +71,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 	let createWorker = function (worker) {
 		let deferred = $q.defer();
 
-		$http.post('/api/workers', worker).then(function (response) {
+		$http.post('/api/workers', worker).then(function () {
 			deferred.resolve();
 		}, function (response) {
 			deferred.reject(response);
@@ -85,7 +84,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 	let deleteWorker = function (worker) {
 		let deferred = $q.defer();
 
-		$http.delete('/api/workers/' + worker.sid).then(function (response) {
+		$http.delete('/api/workers/' + worker.sid).then(function () {
 			deferred.resolve();
 		}, function (response) {
 			deferred.reject(response);
@@ -98,7 +97,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 	$scope.init = function () {
 
 		$q.all([retrieveSetup(), retrieveWorkers(),retrieveOnGoingConferences()])
-			.then(function (data) {
+			.then(function () {
 				$log.log('configuration and worker loaded');
 			}).catch(function (error) {
 				$scope.UI.warning = error;
@@ -132,7 +131,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 
 		createWorker(worker).then(function () {
 			return retrieveWorkers();
-		}).then(function (data) {
+		}).then(function () {
 			$log.log('worker successfully created');
 			$scope.UI.isSaving = false;
 			$scope.UI.showForm = false;
@@ -160,7 +159,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 		}
 
 		deleteWorker(worker)
-			.then(function (data) {
+			.then(function () {
 				$log.log('worker successfully deleted');
 			}).catch(function (error) {
 				$scope.UI.warning = error;
@@ -196,7 +195,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 		}
 
 		$http.post('/api/setup', { configuration: $scope.configuration })
-			.then(function onSuccess (response) {
+			.then(function onSuccess () {
 				$scope.UI.isSaving = false;
 				$scope.$apply();
 			}, function (response) {
