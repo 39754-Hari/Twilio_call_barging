@@ -118,7 +118,7 @@ module.exports.getOnGoingConferences = function(req,res){
 
 getCallerName = function(ParticipantsList){
 	return new Promise((resolve,reject)=>{
-		participants.forEach(participant =>{
+		ParticipantsList.forEach(participant =>{
 			client.calls(participant)
 					  .fetch()
 					  .then(call => {
