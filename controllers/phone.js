@@ -172,8 +172,23 @@ module.exports.getOnGoingConferences = function(req,res){
                     conferences.forEach(conference => {
                         conferenceHelper.getConferenceParticipants(conference.sid)
                         .then(participants=>{
-                            console.log('Participants List:',participants);
-                            return getCallerName(participants);
+							console.log('Participants List:',participants);
+							let callTo =''
+							//return getCallerName(participants);
+							ParticipantsList.forEach(participant =>{
+								client.calls(participant)
+								  .fetch()
+								  .then(call => {
+									  console.log('Participant::',participant,';Call to:',call.to)
+									  callTo = call.to;
+									  if(callTo.indexOf('client')!=-1){
+										  console.log('condition pass');
+										callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
+										console.log('condition pass::',callTo);										
+									  }
+									})
+								})
+								return callTo;
 						})
 						.then(caller =>{
 							conference.agent = caller;
