@@ -130,7 +130,7 @@ getCallerName = function(conferences){
 		conferences.forEach(conference => {
 			conferenceHelper.getConferenceParticipants(conference.sid)
 			.then(ParticipantsList=>{
-				console.log('Participants List:',participants);
+				console.log('Participants List:',ParticipantsList);
 					ParticipantsList.forEach(participant =>{
 					client.calls(participant)
 					  .fetch()
