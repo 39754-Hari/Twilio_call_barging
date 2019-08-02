@@ -110,7 +110,7 @@ module.exports.getOnGoingConferences = function(req,res){
 					})
 			}
 		]),
-		function(err,callback){
+		function(err,result){
 			if(!err){
 				console.log('conferences List After ::', JSON.stringify(result));
 				res.json(result);
