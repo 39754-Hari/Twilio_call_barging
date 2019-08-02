@@ -175,7 +175,7 @@ module.exports.getOnGoingConferences = function(req,res){
 							console.log('Participants List:',participants);
 							let callTo =''
 							//return getCallerName(participants);
-							ParticipantsList.forEach(participant =>{
+							participants.forEach(participant =>{
 								client.calls(participant)
 								  .fetch()
 								  .then(call => {
