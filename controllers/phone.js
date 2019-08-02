@@ -197,7 +197,6 @@ module.exports.getOnGoingConferences = function(req,res){
 
 
 getCallerName = function(conferences){
-	return new Promise((resolve,reject)=>{
 		conferences.forEach(conference => {
 			conferenceHelper.getConferenceParticipants(conference.sid)
 			.then(ParticipantsList=>{
@@ -219,10 +218,7 @@ getCallerName = function(conferences){
 		
 				})
 			})
-		resolve(conferences);
-		}).catch(error => {
-			reject(error)
-	})
+		return(conferences);
 }
 
 module.exports.hold = function (req, res) {
