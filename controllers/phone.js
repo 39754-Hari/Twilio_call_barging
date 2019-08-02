@@ -184,11 +184,12 @@ module.exports.getOnGoingConferences = function(req,res){
 									  if(callTo.indexOf('client')!=-1){
 										  console.log('condition pass');
 										callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
-										console.log('condition pass::',callTo);										
+										console.log('condition pass::',callTo);	
+										return callTo;									
 									  }
 									})
 								})
-								return callTo;
+								
 						})
 						.then(caller =>{
 							conference.agent = caller;
