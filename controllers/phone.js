@@ -93,7 +93,6 @@ async function getOnGoingConferences(req,res){
 		client.conferences
 			.list(options)
 			.then(conferences => {
-				conferences = JSON.parse('[{"accountSid":"AC962f4b2c2e873edf19da505c0321350d","dateCreated":"2019-08-02T06:22:56.000Z","dateUpdated":"2019-08-02T06:22:59.000Z","apiVersion":"2010-04-01","friendlyName":"WT7237fb201644fd2710a1def2865eff7c","region":"sg1","sid":"CF730c2d06f22e20f3dfc9cf371af48a91","status":"in-progress","uri":"/2010-04-01/Accounts/AC962f4b2c2e873edf19da505c0321350d/Conferences/CF730c2d06f22e20f3dfc9cf371af48a91.json","subresourceUris":{"participants":"/2010-04-01/Accounts/AC962f4b2c2e873edf19da505c0321350d/Conferences/CF730c2d06f22e20f3dfc9cf371af48a91/Participants.json","recordings":"/2010-04-01/Accounts/AC962f4b2c2e873edf19da505c0321350d/Conferences/CF730c2d06f22e20f3dfc9cf371af48a91/Recordings.json"}}]')
 				if (conferences.length === 0) {
 					res.json('NOT_FOUND')
 				} else {
@@ -130,9 +129,8 @@ getCallerName = function(conferences){
 	return new Promise((resolve,reject)=>{
 		conferences.forEach(conference => {
 			conferenceHelper.getConferenceParticipants(conference.sid)
-			.then(participantsList=>{
-				participantsList = [ 'CAa9933a636ef8d258b886654e9fa6da2f','CA5bc87ddf9079a31ec9cc482c001567a2' ]
-				console.log('Participants List:',participantsList);
+			.then(ParticipantsList=>{
+				console.log('Participants List:',ParticipantsList);
 					ParticipantsList.forEach(participant =>{
 					client.calls(participant)
 					  .fetch()
