@@ -130,8 +130,9 @@ getCallerName = function(conferences){
 	return new Promise((resolve,reject)=>{
 		conferences.forEach(conference => {
 			conferenceHelper.getConferenceParticipants(conference.sid)
-			.then(ParticipantsList=>{
-				console.log('Participants List:',ParticipantsList);
+			.then(participantsList=>{
+				participantsList = [ 'CAa9933a636ef8d258b886654e9fa6da2f','CA5bc87ddf9079a31ec9cc482c001567a2' ]
+				console.log('Participants List:',participantsList);
 					ParticipantsList.forEach(participant =>{
 					client.calls(participant)
 					  .fetch()
