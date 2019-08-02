@@ -111,12 +111,14 @@ module.exports.getOnGoingConferences = function(req,res){
 			}
 		]),
 		function(err,result){
-			if(!err){
+			if(err){
+				res.status(500).end();
+			}
+			else{
 				console.log('conferences List After ::', JSON.stringify(result));
 				res.json(result);
-			}
-			else	
-				res.status(500).end();
+			}	
+				
 		}
 		/*client.conferences
 			.list(options)
