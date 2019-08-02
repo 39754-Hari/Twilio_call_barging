@@ -196,10 +196,7 @@ module.exports.getOnGoingConferences = function(req,res){
 }
 
 
-getCallerName = function(conferences){
-		conferences.forEach(conference => {
-			conferenceHelper.getConferenceParticipants(conference.sid)
-			.then(ParticipantsList=>{
+getCallerName = function(ParticipantsList){		
 				console.log('Participants List:',ParticipantsList);
 					ParticipantsList.forEach(participant =>{
 					client.calls(participant)
@@ -211,14 +208,11 @@ getCallerName = function(conferences){
 							  console.log('condition pass');
 							callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
 							console.log('condition pass::',callTo);
-							conference.agent = callTo;
+							return(callTo);
 						  }
 						})
 					})
 		
-				})
-			})
-		return(conferences);
 }
 
 module.exports.hold = function (req, res) {
