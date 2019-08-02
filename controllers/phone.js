@@ -106,6 +106,7 @@ module.exports.getOnGoingConferences = function(req,res){
 			function(conferences,callback){
 				getCallerName(conferences)
 					.then(result=>{
+						console.log('Result:',result);
 						callback(null,result)
 					})
 			}
