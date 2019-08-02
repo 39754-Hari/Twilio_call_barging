@@ -86,7 +86,7 @@ module.exports.addParticipant = function (req, res) {
 
 }
 
-module.exports.getOnGoingConferences = function(req,res){
+/*module.exports.getOnGoingConferences = function(req,res){
 	console.log('INside getOnGoingConferences');
 	const options = {
 		status: 'in-progress'
@@ -121,7 +121,7 @@ module.exports.getOnGoingConferences = function(req,res){
 			}	
 				
 		}
-		/*client.conferences
+		client.conferences
 			.list(options)
 			.then(conferences => {
 				if (conferences.length === 0) {
@@ -153,8 +153,48 @@ module.exports.getOnGoingConferences = function(req,res){
 			})
 			.catch(error => {
 				res.status(500).end();
-			})*/
+			})
+}*/
+
+module.exports.getOnGoingConferences = function(req,res){
+    console.log('INside getOnGoingConferences');
+    const options = {
+        status: 'in-progress'
+    }   
+        client.conferences
+            .list(options)
+            .then(conferences => {
+                if (conferences.length === 0) {
+                    res.json('NOT_FOUND')
+                } else {
+                    console.log('conferences List ::', JSON.stringify(conferences));
+                    let count=0;
+                    conferences.forEach(conference => {
+                        conferenceHelper.getConferenceParticipants(conference.sid)
+                        .then(participants=>{
+                            console.log('Participants List:',participants);
+                            return getCallerName(participants);
+						})
+						.then(caller =>{
+							conference.agent = caller;
+                        	count++;
+                            if(count>=conferences.length){
+                                res.json(conferences);
+                            }
+                            console.log('Caller name',caller,conference.sid);
+                            }).catch(error => {
+                                console.log(error)
+                            })
+                    });
+                    //console.log('conferences List After ::', JSON.stringify(conferences));
+                   
+                }
+            })
+            .catch(error => {
+                res.status(500).end();
+            })
 }
+
 
 getCallerName = function(conferences){
 	return new Promise((resolve,reject)=>{
