@@ -85,7 +85,7 @@ module.exports.addParticipant = function (req, res) {
 
 }
 
-module.exports.getOnGoingConferences = function(req,res){
+async function getOnGoingConferences(req,res){
 	console.log('INside getOnGoingConferences');
 	const options = {
 		status: 'in-progress'
@@ -123,7 +123,7 @@ module.exports.getOnGoingConferences = function(req,res){
 			.catch(error => {
 				res.status(500).end();
 			})
-}
+};
 
 getCallerName = function(conferences){
 	return new Promise((resolve,reject)=>{
@@ -153,6 +153,8 @@ getCallerName = function(conferences){
 			reject(error)
 	})
 }
+
+module.exports(getOnGoingConferences);
 
 module.exports.hold = function (req, res) {
 
