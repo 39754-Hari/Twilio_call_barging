@@ -1,4 +1,5 @@
 const twilio = require('twilio')
+const async = require('async');
 
 const client = twilio(
 	process.env.TWILIO_ACCOUNT_SID,
