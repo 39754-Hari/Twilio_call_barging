@@ -85,18 +85,45 @@ module.exports.addParticipant = function (req, res) {
 
 }
 
-module.exports.getOnGoingConferences = async function(req,res){
+module.exports.getOnGoingConferences = function(req,res){
 	console.log('INside getOnGoingConferences');
 	const options = {
 		status: 'in-progress'
 	}	
-		client.conferences
+		async.waterfall([
+			function(callback){
+				client.conferences
+			.list(options)
+			.then(conferences => {
+					if (conferences.length === 0) {
+						res.json('NOT_FOUND')
+					} else {
+						callback(null,conferences)
+					}
+				})
+			},
+			function(conferences,callback){
+				getCallerName(conferences)
+					.then(result=>{
+						callback(null,result)
+					})
+			}
+		]),
+		function(err,callback){
+			if(!err){
+				console.log('conferences List After ::', JSON.stringify(result));
+				res.json(result);
+			}
+			else	
+				res.status(500).end();
+		}
+		/*client.conferences
 			.list(options)
 			.then(conferences => {
 				if (conferences.length === 0) {
 					res.json('NOT_FOUND')
 				} else {
-					/*console.log('conferences List ::', JSON.stringify(conferences));
+					console.log('conferences List ::', JSON.stringify(conferences));
 					conferences.forEach(conference => {
 						conferenceHelper.getConferenceParticipants(conference.sid)
 						.then(participants=>{
@@ -110,7 +137,7 @@ module.exports.getOnGoingConferences = async function(req,res){
 								console.log(error)
 							})
 						})
-					});*/
+					});
 					getCallerName(conferences)
 					.then(result=>{
 						console.log('conferences List After ::', JSON.stringify(result));
@@ -122,7 +149,7 @@ module.exports.getOnGoingConferences = async function(req,res){
 			})
 			.catch(error => {
 				res.status(500).end();
-			})
+			})*/
 }
 
 getCallerName = function(conferences){
