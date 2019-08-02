@@ -93,6 +93,7 @@ async function getOnGoingConferences(req,res){
 		client.conferences
 			.list(options)
 			.then(conferences => {
+				conferences = JSON.parse('[{"accountSid":"AC962f4b2c2e873edf19da505c0321350d","dateCreated":"2019-08-02T06:22:56.000Z","dateUpdated":"2019-08-02T06:22:59.000Z","apiVersion":"2010-04-01","friendlyName":"WT7237fb201644fd2710a1def2865eff7c","region":"sg1","sid":"CF730c2d06f22e20f3dfc9cf371af48a91","status":"in-progress","uri":"/2010-04-01/Accounts/AC962f4b2c2e873edf19da505c0321350d/Conferences/CF730c2d06f22e20f3dfc9cf371af48a91.json","subresourceUris":{"participants":"/2010-04-01/Accounts/AC962f4b2c2e873edf19da505c0321350d/Conferences/CF730c2d06f22e20f3dfc9cf371af48a91/Participants.json","recordings":"/2010-04-01/Accounts/AC962f4b2c2e873edf19da505c0321350d/Conferences/CF730c2d06f22e20f3dfc9cf371af48a91/Recordings.json"}}]')
 				if (conferences.length === 0) {
 					res.json('NOT_FOUND')
 				} else {
