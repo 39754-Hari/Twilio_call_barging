@@ -96,7 +96,7 @@ module.exports.getOnGoingConferences = function(req,res){
 				if (conferences.length === 0) {
 					res.json('NOT_FOUND')
 				} else {
-					console.log('conferences List ::', JSON.stringify(conferences));
+					/*console.log('conferences List ::', JSON.stringify(conferences));
 					conferences.forEach(conference => {
 						conferenceHelper.getConferenceParticipants(conference.sid)
 						.then(participants=>{
@@ -110,13 +110,14 @@ module.exports.getOnGoingConferences = function(req,res){
 								console.log(error)
 							})
 						})
+					});*/
+					getCallerName(conferences)
+					.then(result=>{
+						console.log('conferences List After ::', JSON.stringify(result));
+						res.json(result);
 					})
-					.then(response=>{
-					console.log('conferences List After ::', JSON.stringify(conferences));
-					//console.log('conferences List After ::')
-					res.json(response);
-					});
-					
+					//console.log('conferences List After ::', JSON.stringify(conferences));
+					//res.json(conferences);
 				}
 			})
 			.catch(error => {
@@ -124,10 +125,14 @@ module.exports.getOnGoingConferences = function(req,res){
 			})
 }
 
-getCallerName = function(ParticipantsList){
+getCallerName = function(conferences){
 	return new Promise((resolve,reject)=>{
-		ParticipantsList.forEach(participant =>{
-			client.calls(participant)
+		conferences.forEach(conference => {
+			conferenceHelper.getConferenceParticipants(conference.sid)
+			.then(ParticipantsList=>{
+				console.log('Participants List:',participants);
+					ParticipantsList.forEach(participant =>{
+					client.calls(participant)
 					  .fetch()
 					  .then(call => {
 						  console.log('Participant::',participant,';Call to:',call.to)
@@ -136,13 +141,16 @@ getCallerName = function(ParticipantsList){
 							  console.log('condition pass');
 							callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
 							console.log('condition pass::',callTo);
-							resolve(callTo)
+							conference.agent = callTo;
 						  }
-						}).catch(error => {
-							reject(error)
 						})
-		})
+					})
 		
+				})
+			})
+		resolve(conferences);
+		}).catch(error => {
+			reject(error)
 	})
 }
 
