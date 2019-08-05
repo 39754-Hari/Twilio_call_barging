@@ -263,7 +263,7 @@ let getCallerName = function(participants){
                 return new Promise((resolve, reject)=>{
                                 let parts= [];
                                 participants.forEach((participant)=>{
-                                                parts.push(getName(participant).catch((err)=>{return err});
+                                                parts.push(getName(participant).catch((err)=>{return err}));
                                 })
                                 Promise.all(parts)
                                 .then((result)=>{
