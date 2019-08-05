@@ -263,13 +263,13 @@ let getCallerName = function(participants){
                 return new Promise((resolve, reject)=>{
                                 let parts= [];
                                 participants.forEach((participant)=>{
-                                                parts.push(getName(participant).catch((err)=>{return err}));
+                                    parts.push(getName(participant).catch((err)=>{return err}));
                                 })
                                 Promise.all(parts)
                                 .then((result)=>{
-                                                if(result[0].callTo){
-                                                                resolve(result[0]);
-                                                }
+                                    if(result[0].callTo){
+                                        resolve(result[0]);
+                                    }
                                 })
                                 .catch((err)=>{
                                                 reject(err);
