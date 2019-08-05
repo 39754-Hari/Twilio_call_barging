@@ -156,7 +156,7 @@ module.exports.addParticipant = function (req, res) {
 			})
 }*/
 
-/*module.exports.getOnGoingConferences = function(req,res){
+module.exports.getOnGoingConferences = function(req,res){
     console.log('INside getOnGoingConferences');
     const options = {
         status: 'in-progress'
@@ -213,8 +213,8 @@ getCallerName = function(ParticipantsList){
 						})
 					})
 		
-}*/
-module.exports.getOnGoingConferences = function(req,res){
+}
+/*module.exports.getOnGoingConferences = function(req,res){
     console.log('INside getOnGoingConferences');
     const options = {
         status: 'in-progress'
@@ -300,7 +300,7 @@ let getName = function(participant){
                 })
                 
         
-}
+}*/
 
 
 module.exports.hold = function (req, res) {
