@@ -86,7 +86,7 @@ module.exports.addParticipant = function (req, res) {
 
 }
 
-/*module.exports.getOnGoingConferences = function(req,res){
+module.exports.getOnGoingConferences = function(req,res){
 	console.log('INside getOnGoingConferences');
 	const options = {
 		status: 'in-progress'
@@ -121,7 +121,7 @@ module.exports.addParticipant = function (req, res) {
 			}	
 				
 		}
-		client.conferences
+		/*client.conferences
 			.list(options)
 			.then(conferences => {
 				if (conferences.length === 0) {
@@ -153,10 +153,10 @@ module.exports.addParticipant = function (req, res) {
 			})
 			.catch(error => {
 				res.status(500).end();
-			})
-}*/
+			})*/
+}
 
-module.exports.getOnGoingConferences = function(req,res){
+/*module.exports.getOnGoingConferences = function(req,res){
     console.log('INside getOnGoingConferences');
     const options = {
         status: 'in-progress'
@@ -194,7 +194,7 @@ module.exports.getOnGoingConferences = function(req,res){
                 res.status(500).end();
             })
 }
-
+*/
 
 getCallerName = function(ParticipantsList){		
 				console.log('Participants List:',ParticipantsList);
