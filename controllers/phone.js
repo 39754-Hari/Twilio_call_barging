@@ -227,17 +227,17 @@ module.exports.getOnGoingConferences = function(req,res){
                 } else {
                     console.log('conferences List ::', JSON.stringify(conferences));
                     let count=0;
-                                                                                let confs=[];
+                	let confs=[];
                     conferences.forEach(conferences => {
-                        confs.push(getConferenceParticipants(conferences).catch((err)=>{return err});
+                        confs.push(getConferenceParticipants(conferences).catch((err)=>{return err}));
                     });
-                                                                                Promise.all(confs)
-                                                                                .then((result)=>{
-                                                                                                res.json(result).end();
-                                                                                })
-                                                                                .catch(err=>{
-                                                                                                res.status(500).end();    
-                                                                                })
+                    Promise.all(confs)
+                    .then((result)=>{
+                    res.json(result).end();
+                    })
+                    .catch(err=>{
+                    res.status(500).end();    
+                    })
                 }
             })
             .catch(error => {
