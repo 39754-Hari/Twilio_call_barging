@@ -156,7 +156,7 @@ module.exports.addParticipant = function (req, res) {
 			})
 }*/
 
-module.exports.getOnGoingConferences = function(req,res){
+/*module.exports.getOnGoingConferences = function(req,res){
     console.log('INside getOnGoingConferences');
     const options = {
         status: 'in-progress'
@@ -172,24 +172,8 @@ module.exports.getOnGoingConferences = function(req,res){
                     conferences.forEach(conference => {
                         conferenceHelper.getConferenceParticipants(conference.sid)
                         .then(participants=>{
-							console.log('Participants List:',participants);
-							let callTo =''
-							//return getCallerName(participants);
-							participants.forEach(participant =>{
-								client.calls(participant)
-								  .fetch()
-								  .then(call => {
-									  console.log('Participant::',participant,';Call to:',call.to)
-									  callTo = call.to;
-									  if(callTo.indexOf('client')!=-1){
-										  console.log('condition pass');
-										callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
-										console.log('condition pass::',callTo);	
-										return callTo;									
-									  }
-									})
-								})
-								
+                            console.log('Participants List:',participants);
+                            return getCallerName(participants);
 						})
 						.then(caller =>{
 							conference.agent = caller;
@@ -229,7 +213,95 @@ getCallerName = function(ParticipantsList){
 						})
 					})
 		
+}*/
+module.exports.getOnGoingConferences = function(req,res){
+    console.log('INside getOnGoingConferences');
+    const options = {
+        status: 'in-progress'
+    }   
+        client.conferences
+            .list(options)
+            .then(conferences => {
+                if (conferences.length === 0) {
+                    res.json('NOT_FOUND')
+                } else {
+                    console.log('conferences List ::', JSON.stringify(conferences));
+                    let count=0;
+                                                                                let confs=[];
+                    conferences.forEach(conferences => {
+                        confs.push(getConferenceParticipants(conferences).catch((err)=>{return err});
+                    });
+                                                                                Promise.all(confs)
+                                                                                .then((result)=>{
+                                                                                                res.json(result).end();
+                                                                                })
+                                                                                .catch(err=>{
+                                                                                                res.status(500).end();    
+                                                                                })
+                }
+            })
+            .catch(error => {
+                res.status(500).end();
+            })
 }
+let getConferenceParticipants = function(conference){
+                return new Promise((resolve, reject)=>{
+                                conferenceHelper.getConferenceParticipants(conference.sid)
+                                .then(participants=>{
+                                                console.log('Participants List:',participants);
+                                                return getCallerName(participants);
+                                })
+                                .then(caller =>{
+                                                conference.agent = caller;
+                                                resolve(conference);
+                                }).catch(error => {
+                                                reject(error);
+                                })
+                });
+}
+let getCallerName = function(participants){
+                return new Promise((resolve, reject)=>{
+                                let parts= [];
+                                participants.forEach((participant)=>{
+                                                parts.push(getName(participant).catch((err)=>{return err});
+                                })
+                                Promise.all(parts)
+                                .then((result)=>{
+                                                if(result[0].callTo){
+                                                                resolve(result[0]);
+                                                }
+                                })
+                                .catch((err)=>{
+                                                reject(err);
+                                })
+                                                
+                });
+}
+let getName = function(participant){     
+                return new Promise((resolve, reject)=>{
+                                client.calls(participant)
+                  .fetch()
+                  .then(call => {
+                                  console.log('Participant::',participant,';Call to:',call.to)
+                                  let callTo = call.to;
+                                  if(callTo.indexOf('client')!=-1){
+                                                  console.log('condition pass');
+                                                callTo = callTo.substring(callTo.indexOf(':')+1,callTo.length);
+                                                console.log('condition pass::',callTo);
+                                                resolve({'callTo':callTo});
+                                  }else{
+                                                reject(false);
+                                  }
+                   })
+                   .catch((err)=>{
+                                                console.log(err);
+                                                reject(false);
+                   })
+                })
+                
+        
+}
+
 
 module.exports.hold = function (req, res) {
 
