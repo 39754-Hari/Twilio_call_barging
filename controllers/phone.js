@@ -86,12 +86,12 @@ module.exports.addParticipant = function (req, res) {
 
 }
 
-module.exports.getOnGoingConferences = function(req,res){
+/*module.exports.getOnGoingConferences = function(req,res){
 	console.log('INside getOnGoingConferences');
 	const options = {
 		status: 'in-progress'
 	}	
-		/*async.waterfall([
+		async.waterfall([
 			function(callback){
 				client.conferences
 			.list(options)
@@ -120,8 +120,8 @@ module.exports.getOnGoingConferences = function(req,res){
 				res.json(result);
 			}	
 				
-		}*/
-		client.conferences
+		}
+		/*client.conferences
 			.list(options)
 			.then(conferences => {
 				if (conferences.length === 0) {
@@ -141,8 +141,8 @@ module.exports.getOnGoingConferences = function(req,res){
 								console.log(error)
 							})
 						})
-					})
-					//getCallerName(conferences)
+					});
+					getCallerName(conferences)
 					.then(result=>{
 						console.log('conferences List After ::', JSON.stringify(result));
 						res.json(result);
@@ -153,10 +153,10 @@ module.exports.getOnGoingConferences = function(req,res){
 			})
 			.catch(error => {
 				res.status(500).end();
-			})
-}
+			})*
+}*/
 
-/*module.exports.getOnGoingConferences = function(req,res){
+module.exports.getOnGoingConferences = function(req,res){
     console.log('INside getOnGoingConferences');
     const options = {
         status: 'in-progress'
@@ -194,7 +194,7 @@ module.exports.getOnGoingConferences = function(req,res){
                 res.status(500).end();
             })
 }
-*/
+
 
 getCallerName = function(ParticipantsList){		
 				console.log('Participants List:',ParticipantsList);
