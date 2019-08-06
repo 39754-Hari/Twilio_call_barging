@@ -213,6 +213,31 @@
 
               </div>
 
+              <div>
+                &nbsp;&nbsp;<br>
+                <h4 style='color: darkgreen'>On-Going Conferences</h4>
+                <table  class="table table-striped table-hover" style="width:100%">
+                  <thead>
+                   <tr >
+                     <th>Conf. SID</th>
+                     <th>Status</th>
+                     <th>Agent</th>
+                     <th>&nbsp;</th>
+                     <th>&nbsp;</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                  <tr ng-repeat="conf in conferences track by conf.sid">
+                   <td>{{conf.sid}}</td>
+                   <td>{{conf.status}}</td>
+                   <td>{{conf.friendly_name}}</td>
+                   <td style="text-align:right"><button class="btn btn-success btn-xs" ng-click="bargein()" ng-show="conf.status == 'in-progress'" >Barge-in</button></td>
+                   <!--<td style="text-align:right"><button class="btn btn-danger btn-xs" ng-click="deleteAgent(worker)" ng-show="worker.activityName == 'Offline'">remove</button></td>-->
+                 </tr>
+               </tbody>
+             </table>
+              </div>
+
               <div class="transfer-control" ng-if="UI.transfer" class="transfer">
 
           <div class="load-indicator" ng-show="transfer.isLoading">

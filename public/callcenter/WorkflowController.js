@@ -46,6 +46,9 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 				// initialize Twilio Video client
 				$scope.$broadcast('InitializeVideo', { token: response.data.tokens.access });
 
+				//Gettting all ongoing conferences
+				$scope.retrieveOnGoingConferences();
+
 			}, function onError (response) {
 				/* session is not valid anymore */
 				if (response.status === 403) {
@@ -156,6 +159,24 @@ app.controller('WorkflowController', function ($scope, $rootScope, $http, $inter
 			$scope.UI.warning.worker = 'TaskRouter Worker: an error occured: ' + error.response + ' with message: ' + error.message;
 			$scope.$apply();
 		});
+
+	};
+
+	$scope.retrieveOnGoingConferences = function () {
+		let deferred = $q.defer();
+
+		$http.get('/api/phone/getOnGoingConf').then(function (response) {
+			$scope.conferences = [];
+
+			response.data.forEach(function (conference) {
+				$scope.conferences.push(conference);
+			});
+
+			deferred.resolve();
+		}, function (response) {
+			deferred.reject(response);
+		});
+		return deferred.promise;
 
 	};
 
