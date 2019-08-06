@@ -141,8 +141,8 @@ module.exports.getOnGoingConferences = function(req,res){
 								console.log(error)
 							})
 						})
-					});
-					getCallerName(conferences)
+					})
+					//getCallerName(conferences)
 					.then(result=>{
 						console.log('conferences List After ::', JSON.stringify(result));
 						res.json(result);
