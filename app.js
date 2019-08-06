@@ -125,6 +125,7 @@ router.route('/phone/call').post(phone.call)
 router.route('/phone/call/:sid/add-participant/:phone').post(phone.addParticipant)
 router.route('/phone/call/:sid/conference').get(phone.getConference)
 router.route('/phone/hold').post(phone.hold)
+router.route('/phone/bargeIntoConference/:sid').post(phone.bargeIntoConference)
 
 router.route('/phone/getOnGoingConf').get(phone.getOnGoingConferences)
 
