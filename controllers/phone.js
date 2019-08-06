@@ -91,7 +91,7 @@ module.exports.getOnGoingConferences = function(req,res){
 	const options = {
 		status: 'in-progress'
 	}	
-		async.waterfall([
+		/*async.waterfall([
 			function(callback){
 				client.conferences
 			.list(options)
@@ -120,8 +120,8 @@ module.exports.getOnGoingConferences = function(req,res){
 				res.json(result);
 			}	
 				
-		}
-		/*client.conferences
+		}*/
+		client.conferences
 			.list(options)
 			.then(conferences => {
 				if (conferences.length === 0) {
@@ -153,7 +153,7 @@ module.exports.getOnGoingConferences = function(req,res){
 			})
 			.catch(error => {
 				res.status(500).end();
-			})*/
+			})
 }
 
 /*module.exports.getOnGoingConferences = function(req,res){
