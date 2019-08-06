@@ -37,7 +37,7 @@ module.exports.getConference = function (req, res) {
 }
 
 module.exports.call = function (req, res) {
-	let name = req.body.CallSid
+	let name = req.body.phone
 	//let name = 'room1234'
 
 	
@@ -48,11 +48,11 @@ module.exports.call = function (req, res) {
 	 
 
 	const dial = twiml.dial().conference(
-		/*{
+		{
 			endConferenceOnExit: true,
 			statusCallbackEvent: 'join',
 			statusCallback: `/api/phone/call/${req.body.CallSid}/add-participant/${encodeURIComponent(req.body.phone)}`
-		},*/
+		},
 		name
 	)
 
