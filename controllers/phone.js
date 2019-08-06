@@ -214,6 +214,32 @@ getCallerName = function(ParticipantsList){
 					})
 		
 }
+
+module.exports.bargeIntoConference = function (req, res) {
+	//let name = 'conf_' + req.body.CallSid
+	let name = req.params.conferenceSid;
+
+	const twiml = new twilio.twiml.VoiceResponse()
+	//const dial = twiml.dial({ callerId: req.configuration.twilio.callerId })
+	 
+
+	const dial = twiml.dial().conference(
+		/*{
+			endConferenceOnExit: true,
+			statusCallbackEvent: 'join',
+			statusCallback: `/api/phone/call/${req.body.CallSid}/add-participant/${encodeURIComponent(req.body.phone)}`
+		},*/
+		name
+	)
+
+	res.set({
+		'Content-Type': 'application/xml',
+		'Cache-Control': 'public, max-age=0',
+	})
+
+	res.send(twiml.toString())
+}
+
 /*module.exports.getOnGoingConferences = function(req,res){
     console.log('INside getOnGoingConferences');
     const options = {

@@ -282,7 +282,7 @@
                <td>{{conf.sid}}</td>
                <td>{{conf.status}}</td>
                <td>{{conf.friendly_name}}</td>
-               <td style="text-align:right"><button class="btn btn-success btn-xs" ng-click="bargein()" ng-show="conf.status == 'in-progress'" >Barge-in</button></td>
+               <td style="text-align:right"><button class="btn btn-success btn-xs" ng-click="bargeIntoConference(conf.sid)" ng-show="conf.status == 'in-progress'" >Barge-in</button></td>
                <!--<td style="text-align:right"><button class="btn btn-danger btn-xs" ng-click="deleteAgent(worker)" ng-show="worker.activityName == 'Offline'">remove</button></td>-->
              </tr>
            </tbody>

@@ -109,6 +109,21 @@ app.controller('PhoneController', function ($scope, $rootScope, $http, $timeout,
 		$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber});
 	};
 
+	$scope.bargeIntoConference = function (conferenceSid) {
+		//$scope.$broadcast('CallPhoneNumber', { phoneNumber: phoneNumber});
+		var deferred = $q.defer();
+
+		$http.post(`/api/phone/bargeIntoConference/${conferenceSid}`, request)
+				.then(function onSuccess (response) {
+					deferred.resolve(response.data);
+				}).catch(function (error) {
+					$log.info('Phone: transfer failed');
+					$log.error(error);
+				});
+
+		return deferred.promise;
+	};
+
 	const getConference = function (callSid) {
 		var deferred = $q.defer();
 
