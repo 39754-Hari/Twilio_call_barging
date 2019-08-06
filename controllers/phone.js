@@ -40,6 +40,9 @@ module.exports.call = function (req, res) {
 	let name = req.body.CallSid
 	//let name = 'room1234'
 
+	
+	console.log('Inside call function: conf. id',name);
+
 	const twiml = new twilio.twiml.VoiceResponse()
 	//const dial = twiml.dial({ callerId: req.configuration.twilio.callerId })
 	 
