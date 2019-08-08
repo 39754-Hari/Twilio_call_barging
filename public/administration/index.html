@@ -40,7 +40,7 @@
           </thead>
           <tbody>
            <tr ng-repeat="worker in workers track by worker.sid">
-            <td>{{worker.friendlyName}}</td>
+            <td>{{worker.full_name}}</td>
             <td>{{worker.activityName}}</td>
             <td>{{worker.attributes.channels | ChannelListFilter:channels}}</td>
             <td>{{worker.attributes.team | TeamName:configuration}}</td>
