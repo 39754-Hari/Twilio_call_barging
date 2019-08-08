@@ -301,7 +301,7 @@ let getCallerName = function(participants){
 									console.log('Result after get caller:',result);
 									for(i=0;i<result.length;i++){
 										if(result[i].callTo){
-											resolve(result[0]);
+											resolve(result[i]);
 										}
 										else	
 											continue;
