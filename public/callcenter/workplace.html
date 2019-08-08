@@ -38,7 +38,7 @@
 
         </div>
 
-          <h3 class="name" class="page-header">{{worker.friendlyName}}&#39;s Call Agent Interface</h3>
+          <h3 class="name" class="page-header">{{worker.attributes.full_name}}&#39;s Call Agent Interface</h3>
 
           <div>
             <span style="font-size:1em" ng-class="{'label-success': worker.activityName == 'Available', 'label-danger': worker.activityName == 'Unavailable', 'label-default': worker.activityName == 'Offline' }"
