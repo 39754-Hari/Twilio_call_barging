@@ -281,7 +281,7 @@
                  <td>{{conf.status}}</td>
                  <td>{{conf.agent}}</td>
                  <td style="text-align:right"><button class="btn btn-success btn-xs" ng-click="call(conf.friendlyName)" ng-show="conf.status == 'in-progress' && UI.state == 'idle'" >Barge-in</button></td>
-                 <td style="text-align:right"></td><button class="btn btn-danger btn-xs" ng-if="UI.state == 'busy'" ng-click="hangUp()">HANGUP</button></td>
+                 <td style="text-align:right"><button class="btn btn-danger btn-xs" ng-if="UI.state == 'busy'" ng-click="hangUp()">HANGUP</button></td>
                  <!--<td style="text-align:right"><button class="btn btn-danger btn-xs" ng-click="deleteAgent(worker)" ng-show="worker.activityName == 'Offline'">remove</button></td>-->
                </tr>
              </tbody>
