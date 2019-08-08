@@ -282,7 +282,7 @@ let getConferenceParticipants = function(conference){
                                 })
                                 .then(caller =>{
 									console.log('Caller name:',caller)
-                                                conference.agent = caller;
+                                                conference.agent = caller.callTo;
                                                 resolve(conference);
                                 }).catch(error => {
                                                 reject(error);
