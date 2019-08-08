@@ -262,6 +262,7 @@ module.exports.getOnGoingConferences = function(req,res){
                     });
                     Promise.all(confs)
                     .then((result)=>{
+						console.log('Final result:',result);
                     res.json(result).end();
                     })
                     .catch(err=>{
