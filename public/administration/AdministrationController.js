@@ -96,7 +96,7 @@ function AdministrationController ($scope, $http, $log, $q) {
 
 	$scope.init = function () {
 
-		$q.all([retrieveSetup(), retrieveWorkers(),retrieveOnGoingConferences()])
+		$q.all([retrieveSetup(), retrieveWorkers()])
 			.then(function () {
 				$log.log('configuration and worker loaded');
 			}).catch(function (error) {
