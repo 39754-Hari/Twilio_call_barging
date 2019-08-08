@@ -281,6 +281,7 @@ let getConferenceParticipants = function(conference){
                                                 return getCallerName(participants);
                                 })
                                 .then(caller =>{
+									console.log('Caller name:',caller)
                                                 conference.agent = caller;
                                                 resolve(conference);
                                 }).catch(error => {
