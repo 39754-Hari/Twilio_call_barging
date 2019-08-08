@@ -296,6 +296,7 @@ let getCallerName = function(participants){
                                 })
                                 Promise.all(parts)
                                 .then((result)=>{
+									console.log('Result after get caller:',result);
                                     if(result[0].callTo){
                                         resolve(result[0]);
                                     }
