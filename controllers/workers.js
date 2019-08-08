@@ -43,7 +43,7 @@ module.exports.list = function (req, res) {
 	client.taskrouter.workspaces(process.env.TWILIO_WORKSPACE_SID).workers.list()
 		.then(workers => {
 			let payload =[]
-			//console.log('Workers List ::', JSON.stringify(workers));
+			console.log('Workers List ::', JSON.stringify(workers));
 			for (let i = 0; i < workers.length; i++) {
 				const worker = {
 					sid: workers[i].sid,
