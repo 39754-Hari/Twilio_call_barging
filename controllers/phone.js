@@ -299,9 +299,14 @@ let getCallerName = function(participants){
                                 Promise.all(parts)
                                 .then((result)=>{
 									console.log('Result after get caller:',result);
-                                    if(result[0].callTo){
-                                        resolve(result[0]);
-                                    }
+									for(i=0;i<result.length;i++){
+										if(result[i].callTo){
+											resolve(result[0]);
+										}
+										else	
+											continue;
+									}
+                                    
                                 })
                                 .catch((err)=>{
                                                 reject(err);
