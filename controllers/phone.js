@@ -49,7 +49,7 @@ module.exports.call = function (req, res) {
 
 	const dial = twiml.dial().conference(
 		{
-			endConferenceOnExit: true,
+			endConferenceOnExit: false,
 			statusCallbackEvent: 'join',
 			statusCallback: `/api/phone/call/${req.body.CallSid}/add-participant/${encodeURIComponent(req.body.phone)}`
 		},
