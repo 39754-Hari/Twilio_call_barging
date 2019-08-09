@@ -1,26 +1,16 @@
 {
 	"ivr": {
-		"text": "Thanks for calling. You can press a key or say the department name. Press 1 for Order status, press 2 for Loyalty, press 3 for Availability, press 4 for Pricing",
+		"text": "Thanks for calling. You can press a key or say the department name. Press 1 for Sales, press 2 for Support",
 		"options": [
 			{
-				"friendlyName": "Order status",
+				"friendlyName": "Sales",
 				"digit": 1,
-				"id": "order_status"
+				"id": "sales"
 			},
 			{
-				"friendlyName": "Loyalty",
+				"friendlyName": "Support",
 				"digit": 2,
-				"id": "loyalty"
-			},
-			{
-				"friendlyName": "Availability Related",
-				"digit": 2,
-				"id": "Availability_Related"
-			},
-			{
-				"friendlyName": "Pricing Related",
-				"digit": 2,
-				"id": "pricing_Related"
+				"id": "support"
 			}
 		]
 	},
