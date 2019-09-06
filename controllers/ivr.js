@@ -134,6 +134,6 @@ module.exports.createTask = function (req, res) {
 module.exports.getOpenOrders = function (req, res) {
 	/* create task attributes */
 	console.log(req);
-			res.send(true)
+			res.send('true');
 
 }
