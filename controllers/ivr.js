@@ -133,11 +133,11 @@ module.exports.createTask = function (req, res) {
 
 module.exports.getOpenOrders = function (req, res) {
 	/* create task attributes */
-	console.log(req);
+	console.log(req.query);
 		var data={
 			'openOrders':1,
 			'date':2
 		}
-			res.send('true',data);
+			res.send(data);
 
 }
