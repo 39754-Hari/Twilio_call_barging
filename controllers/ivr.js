@@ -135,8 +135,8 @@ module.exports.getOpenOrders = function (req, res) {
 	/* create task attributes */
 	console.log(req.query);
 		var data={
-			'openOrders':1,
-			'date':2
+			openOrders:1,
+			date:2
 		}
 			res.send(data);
 
