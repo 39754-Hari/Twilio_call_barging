@@ -141,7 +141,7 @@ var ivr = require('./controllers/ivr.js')
 router.route('/ivr/welcome').get(ivr.welcome)
 router.route('/ivr/select-team').get(ivr.selectTeam)
 router.route('/ivr/create-task').get(ivr.createTask)
-router.route('/ivr/getOpenOrders').get(ivr.getOpenOrders)
+router.route('/ivr/getOpenOrders').post(ivr.getOpenOrders)
 
 /* routes called by the Twilio TaskRouter */
 var taskrouter = require('./controllers/taskrouter.js')
