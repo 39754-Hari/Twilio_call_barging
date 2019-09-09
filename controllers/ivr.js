@@ -139,6 +139,7 @@ module.exports.getOpenOrders = function (req, res) {
 			'date':2,
 			'delivery':1
 		}
-			res.send(JSON.parse(data));
+		data = JSON.stringify(data);
+		res.send(JSON.parse(data));
 
 }
