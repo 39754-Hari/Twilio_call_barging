@@ -136,7 +136,8 @@ module.exports.getOpenOrders = function (req, res) {
 	console.log(req.query);
 		var data={
 			openOrders:1,
-			date:2
+			date:2,
+			delivery:1
 		}
 			res.send(data);
 
