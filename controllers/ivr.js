@@ -139,6 +139,6 @@ module.exports.getOpenOrders = function (req, res) {
 			date:2,
 			delivery:1
 		}
-			res.send(data);
+			res.send(JSON.parse(data));
 
 }
