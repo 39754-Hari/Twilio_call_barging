@@ -232,7 +232,7 @@ var forwardMessage = function (to, body, req) {
 module.exports.outbound = function (req, res) {
 	req.direction = 'outbound: '
 
-	console.log(req.direction + 'request received: %j', req.body.Body + ' - ' + new Date())
+	/*console.log(req.direction + 'request received: %j', req.body.Body + ' - ' + new Date())
 
 	client.chat.services(process.env.TWILIO_CHAT_SERVICE_SID).channels(req.body.ChannelSid).fetch()
 		.then(function (channel) {
@@ -256,5 +256,6 @@ module.exports.outbound = function (req, res) {
 		}).catch(function (err) {
 			console.log(req.direction + 'forwarding chat message failed: %s', res.convertErrorToJSON(err))
 			res.status(500).send(res.convertErrorToJSON(err))
-		})
+		})*/
+	res.status(200).send('blah')
 }
