@@ -257,5 +257,5 @@ module.exports.outbound = function (req, res) {
 			console.log(req.direction + 'forwarding chat message failed: %s', res.convertErrorToJSON(err))
 			res.status(500).send(res.convertErrorToJSON(err))
 		})*/
-	res.status(200).send('blah')
+	res.status(200)
 }
